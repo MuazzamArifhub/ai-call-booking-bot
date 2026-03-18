@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — NeuralAgency</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="logo">⚡ NeuralAgency</a>
+      <div class="nav-links">
+        <a href="/dashboard" class="active">Dashboard</a>
+        <a href="/#brief" class="btn btn-primary">New Campaign</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="dashboard-container">
+    <div class="dashboard-header">
+      <h1>Campaign Dashboard</h1>
+      <p>All recent campaign jobs and their status.</p>
+    </div>
+
+    {% if jobs %}
+    <table class="jobs-table">
+      <thead>
+        <tr>
+          <th>Business</th>
+          <th>Goal</th>
+          <th>Status</th>
+          <th>Created</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for job in jobs %}
+        {% set brief = job.brief if job.brief is mapping else {} %}
+        <tr>
+          <td><strong>{{ brief.business_name or '—' }}</strong></td>
+          <td class="td-truncate">{{ brief.campaign_goal or '—' }}</td>
+          <td>
+            <span class="status-badge status-{{ job.status }}">
+              {% if job.status == 'completed' %}✅ Completed
+              {% elif job.status == 'failed' %}❌ Failed
+              {% elif job.status == 'pending' %}⏳ Pending
+              {% else %}🔄 {{ job.status.replace('_', ' ').title() }}
+              {% endif %}
+            </span>
+          </td>
+          <td class="td-meta">{{ job.created_at[:16].replace('T', ' ') }}</td>
+          <td>
+            <a href="/results/{{ job.id }}" class="btn btn-ghost btn-sm">View →</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="empty-state">
+      <p>No campaigns yet.</p>
+      <a href="/#brief" class="btn btn-primary">Submit Your First Brief →</a>
+    </div>
+    {% endif %}
+  </div>
+
+  <footer class="footer">
+    <p>NeuralAgency · Built for Y Combinator Spring 2026</p>
+  </footer>
+</body>
+</html>

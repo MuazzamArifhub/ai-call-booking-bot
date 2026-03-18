@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeuralAgency — AI-Native Full-Service Marketing Agency</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="logo">⚡ NeuralAgency</a>
+      <div class="nav-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="#brief" class="btn btn-primary">Get Your Campaign</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">🏆 Built for Y Combinator Spring 2026</div>
+    <h1>Your Entire Marketing Campaign,<br><span class="gradient-text">Delivered in Minutes</span></h1>
+    <p class="hero-sub">
+      Skip the $50/month SaaS tools. NeuralAgency's AI agents do the work your agency charges
+      $5,000–$25,000 for — strategy, copy, content calendar, SEO — delivered in under 5 minutes.
+    </p>
+    <div class="hero-cta">
+      <a href="#brief" class="btn btn-primary btn-lg">Submit Your Brief →</a>
+      <a href="/dashboard" class="btn btn-ghost btn-lg">View Sample Outputs</a>
+    </div>
+    <div class="hero-metrics">
+      <div class="metric"><span class="metric-val">4</span><span class="metric-label">AI Agents</span></div>
+      <div class="metric"><span class="metric-val">&lt;5min</span><span class="metric-label">Delivery</span></div>
+      <div class="metric"><span class="metric-val">$5k+</span><span class="metric-label">Equivalent Value</span></div>
+      <div class="metric"><span class="metric-val">∞</span><span class="metric-label">Scalable</span></div>
+    </div>
+  </section>
+
+  <!-- How it works -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">Four AI Agents. One Complete Campaign.</h2>
+      <p class="section-sub">Each agent is a specialist. Together, they outperform entire agency teams.</p>
+      <div class="agents-grid">
+        <div class="agent-card">
+          <div class="agent-icon">🧠</div>
+          <h3>Strategy Agent</h3>
+          <p>Analyzes your brief and produces a full campaign strategy: positioning, messaging architecture, channel mix, timeline, and KPIs.</p>
+          <div class="agent-model">Claude Opus 4.6</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-icon">✍️</div>
+          <h3>Copy Agent</h3>
+          <p>Writes high-converting ad copy for Facebook, Instagram, Google Search. Plus landing page copy, headlines, and email subject lines.</p>
+          <div class="agent-model">Claude Opus 4.6</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-icon">📅</div>
+          <h3>Content Agent</h3>
+          <p>Builds a 30-day social media content calendar with ready-to-post copy. Plus a 5-email welcome sequence that nurtures leads.</p>
+          <div class="agent-model">Claude Opus 4.6</div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-icon">🔍</div>
+          <h3>SEO Agent</h3>
+          <p>Delivers keyword strategy, content cluster map, and a complete SEO-optimized blog post — ready to publish and rank.</p>
+          <div class="agent-model">Claude Sonnet 4.6</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Brief form -->
+  <section class="section section-dark" id="brief">
+    <div class="container container-narrow">
+      <h2 class="section-title">Submit Your Client Brief</h2>
+      <p class="section-sub">Fill in the details. Our agents will handle the rest.</p>
+
+      <form id="briefForm" class="brief-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Business Name *</label>
+            <input type="text" name="business_name" placeholder="e.g. Acme Corp" required>
+          </div>
+          <div class="form-group">
+            <label>Campaign Goal *</label>
+            <input type="text" name="campaign_goal" placeholder="e.g. Drive 500 SaaS trial signups" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Product / Service Description *</label>
+          <textarea name="product_description" rows="3" placeholder="Describe what you sell, its main benefits, and why customers love it..." required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Target Audience *</label>
+          <textarea name="target_audience" rows="2" placeholder="e.g. B2B SaaS founders, 25-45, raising Series A, technical background..." required></textarea>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Brand Voice</label>
+            <input type="text" name="brand_voice" placeholder="e.g. Bold, witty, direct — like Basecamp">
+          </div>
+          <div class="form-group">
+            <label>Budget Range</label>
+            <input type="text" name="budget_range" placeholder="e.g. $10k/month">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Timeline</label>
+            <input type="text" name="timeline" placeholder="e.g. 30 days">
+          </div>
+          <div class="form-group">
+            <label>Key Differentiators</label>
+            <input type="text" name="differentiators" placeholder="e.g. 10x faster, half the price, no code required">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Deliverables (select all that apply)</label>
+          <div class="checkbox-group">
+            <label class="checkbox-label">
+              <input type="checkbox" name="deliverables" value="strategy" checked> Campaign Strategy
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="deliverables" value="copy" checked> Ad Copy & Landing Page
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="deliverables" value="social_content" checked> Social Calendar & Emails
+            </label>
+            <label class="checkbox-label">
+              <input type="checkbox" name="deliverables" value="seo" checked> SEO Content
+            </label>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg btn-full" id="submitBtn">
+          🚀 Launch AI Campaign Generation
+        </button>
+      </form>
+
+      <!-- Status -->
+      <div id="statusBox" class="status-box hidden">
+        <div class="status-spinner"></div>
+        <div>
+          <p id="statusText" class="status-text">Submitting your brief...</p>
+          <p class="status-sub">Our AI agents are working. This typically takes 2–4 minutes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why AI-native -->
+  <section class="section">
+    <div class="container">
+      <h2 class="section-title">The AI-Native Agency Model</h2>
+      <div class="compare-grid">
+        <div class="compare-card compare-old">
+          <h3>Traditional Agency</h3>
+          <ul>
+            <li>❌ 2–4 week turnaround</li>
+            <li>❌ $5,000–$25,000 per campaign</li>
+            <li>❌ Junior staff doing the work</li>
+            <li>❌ Endless revision cycles</li>
+            <li>❌ Headcount limits scale</li>
+          </ul>
+        </div>
+        <div class="compare-card compare-new">
+          <h3>NeuralAgency</h3>
+          <ul>
+            <li>✅ Under 5 minutes delivery</li>
+            <li>✅ Fraction of the cost</li>
+            <li>✅ Senior-level AI agents every time</li>
+            <li>✅ Unlimited iterations</li>
+            <li>✅ Infinite scale, zero headcount</li>
+          </ul>
+        </div>
+      </div>
+      <p class="yc-quote">
+        "Instead of selling software that helps customers do the work themselves,
+        agencies can now use AI internally and sell the finished output directly —
+        and charge dramatically more for it."
+        <br><em>— Y Combinator, Spring 2026 Requests for Startups</em>
+      </p>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>NeuralAgency · Built for Y Combinator Spring 2026 · AI-Native Agencies category</p>
+    <p>Powered by Claude Opus 4.6 & Claude Sonnet 4.6</p>
+  </footer>
+
+  <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campaign Results — NeuralAgency</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+  <link rel="stylesheet" href="/static/css/results.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-inner">
+      <a href="/" class="logo">⚡ NeuralAgency</a>
+      <div class="nav-links">
+        <a href="/dashboard">Dashboard</a>
+        <a href="/#brief" class="btn btn-primary">New Campaign</a>
+      </div>
+    </div>
+  </nav>
+
+  <div class="results-container">
+    {% set brief = job.brief if job.brief is mapping else {} %}
+
+    <div class="results-header">
+      <div class="results-badge">
+        {% if job.status == 'completed' %}✅ Campaign Complete{% elif job.status == 'failed' %}❌ Failed{% else %}⏳ Processing{% endif %}
+      </div>
+      <h1>{{ brief.business_name or 'Campaign' }} — Full Marketing Campaign</h1>
+      <p class="results-meta">
+        Job ID: <code>{{ job.id }}</code> ·
+        Created: {{ job.created_at[:19].replace('T', ' ') }} UTC
+        {% if job.completed_at %} · Completed: {{ job.completed_at[:19].replace('T', ' ') }} UTC{% endif %}
+      </p>
+    </div>
+
+    {% if job.status == 'completed' %}
+
+    <!-- Brief Summary -->
+    <div class="results-brief-summary">
+      <h3>📋 Brief Summary</h3>
+      <div class="brief-pills">
+        <span class="pill"><strong>Goal:</strong> {{ brief.campaign_goal }}</span>
+        <span class="pill"><strong>Audience:</strong> {{ brief.target_audience[:80] }}{% if brief.target_audience|length > 80 %}...{% endif %}</span>
+        <span class="pill"><strong>Voice:</strong> {{ brief.brand_voice }}</span>
+        {% if brief.budget_range and brief.budget_range != 'Not specified' %}
+        <span class="pill"><strong>Budget:</strong> {{ brief.budget_range }}</span>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tabs">
+      {% if job.strategy %}<button class="tab active" data-tab="strategy">🧠 Strategy</button>{% endif %}
+      {% if job.copy_assets %}<button class="tab" data-tab="copy">✍️ Ad Copy</button>{% endif %}
+      {% if job.social_content %}<button class="tab" data-tab="social">📅 Content</button>{% endif %}
+      {% if job.seo_content %}<button class="tab" data-tab="seo">🔍 SEO</button>{% endif %}
+    </div>
+
+    <div class="tab-panels">
+      {% if job.strategy %}
+      <div class="tab-panel active" id="panel-strategy">
+        <div class="panel-toolbar">
+          <h2>Campaign Strategy</h2>
+          <button class="btn btn-ghost btn-sm copy-btn" data-content="strategy">Copy All</button>
+        </div>
+        <div class="markdown-content" id="strategy-content">{{ job.strategy }}</div>
+      </div>
+      {% endif %}
+
+      {% if job.copy_assets %}
+      <div class="tab-panel" id="panel-copy">
+        <div class="panel-toolbar">
+          <h2>Ad Copy & Landing Page</h2>
+          <button class="btn btn-ghost btn-sm copy-btn" data-content="copy">Copy All</button>
+        </div>
+        <div class="markdown-content" id="copy-content">{{ job.copy_assets }}</div>
+      </div>
+      {% endif %}
+
+      {% if job.social_content %}
+      <div class="tab-panel" id="panel-social">
+        <div class="panel-toolbar">
+          <h2>Social Calendar & Email Sequence</h2>
+          <button class="btn btn-ghost btn-sm copy-btn" data-content="social">Copy All</button>
+        </div>
+        <div class="markdown-content" id="social-content">{{ job.social_content }}</div>
+      </div>
+      {% endif %}
+
+      {% if job.seo_content %}
+      <div class="tab-panel" id="panel-seo">
+        <div class="panel-toolbar">
+          <h2>SEO Strategy & Content</h2>
+          <button class="btn btn-ghost btn-sm copy-btn" data-content="seo">Copy All</button>
+        </div>
+        <div class="markdown-content" id="seo-content">{{ job.seo_content }}</div>
+      </div>
+      {% endif %}
+    </div>
+
+    {% elif job.status == 'failed' %}
+    <div class="error-box">
+      <h3>Generation Failed</h3>
+      <p>{{ job.error or 'An unknown error occurred.' }}</p>
+      <a href="/#brief" class="btn btn-primary">Try Again</a>
+    </div>
+
+    {% else %}
+    <div class="processing-box" id="processingBox" data-job-id="{{ job.id }}">
+      <div class="processing-spinner"></div>
+      <h3>AI Agents Working...</h3>
+      <p id="processingStatus">Status: {{ job.status }}</p>
+      <p class="processing-sub">This page will automatically refresh when your campaign is ready.</p>
+    </div>
+    {% endif %}
+  </div>
+
+  <script src="/static/js/results.js"></script>
+</body>
+</html>
